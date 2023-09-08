@@ -36,7 +36,7 @@ body {
 
 .user-list-page {
 	margin-right: 26px;
-	width: 64%;
+	width: 67.5%;
 	max-width: 1218px;
 	float: left;
 }
@@ -92,7 +92,7 @@ body {
 }
 
 .user-view-page {
-	width: 30%;
+	width: 32.5%;
 	max-width: 584px;
 	height: 711px;
 	margin-top: 62px;
