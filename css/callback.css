@@ -1,0 +1,23 @@
+.callback {
+    width: 281px;
+    height: 56px;
+    top: 56px;
+    position: absolute;
+    border-radius: 6px;
+    text-align: left;
+    font: normal normal normal 13px/16px Helvetica;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    padding: 22px 21px 26px;
+}
+
+.callback.error {
+    left: 46px;
+    background: #EF7DA0 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 15px #EF7DA05C;
+}
+.callback.success {
+    left: 1593px;
+    background: #66BB6A 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 15px #4CAF505C;
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/callback.css">
+  </head>
+  <body ng-controller="UserList" class="clearfix">
+    
+    <div class="user-list-page clearfix">
+      <div class="user-list-wrap clearfix">
+        <div class="create-user-button clearfix">
+          <button type="button" class="button submit" ng-click="openUser('create')">Create User</button>
+        </div>
+        <ul class="user-list">
+          <li class="table-header clearfix">
+            <span ng-repeat="(key,value) in titleHeader" ng-if="key != 'password'">{{value}}</span>
+          </li>
+          <li class="table-body clearfix" ng-repeat="item in userList">
+            <span ng-repeat="(key,value) in item" ng-if="key != 'password'" ng-click="openUser('edit', item)">{{value}}</span>
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+    <div class="user-view-page" ng-if="userInfo.showUser">
+      <div class="user-veiw-wrap">
+        <div class="user-view-header">
+          <h6>Create new user</h6>
+          <p class="close" ng-click="openUser('close')"></p>
+        </div>
+        <div class="user-view-body">
+          <form name="form">
+            <ul>
+              <li>
+                <label for="username">{{titleHeader.username}}*</label>
+                <input type="text" name="username" id="username" ng-model="user.username" ng-disabled="userInfo.type == 'edit'" required>
+                <span class="error" ng-if="userInfo.notUniqeID">Username must be uniqe</span>
+              </li>
+              <li>
+                <label for="first_name">{{titleHeader.first_name}}*</label>
+                <input type="text" name="first_name" id="first_name" ng-model="user.first_name" required>
+              </li>
+              <li>
+                <label for="last_name">{{titleHeader.last_name}}*</label>
+                <input type="text" name="last_name" id="last_name" ng-model="user.last_name" required>
+              </li>
+              <li>
+                <label for="email">{{titleHeader.email}}*</label>
+                <input type="email" name="email" id="email" ng-model="user.email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" autocomplete="false" required>
+              </li>
+              <li>
+                <label for="user_type">{{titleHeader.user_type}}*</label>
+                <select id="user_type" name="user_type" ng-model="user.user_type" required>
+                  <option ng-repeat="item in userType" ng-value="item">{{item}}</option>
+                </select>
+              </li>
+              <li>
+                <label for="password">{{titleHeader.password}}*</label>
+                <input type="password" name="password" id="password" ng-model="user.password" pattern="^(?=.*[a-z])(?=.*[0-9]).{8,}$" required>
+                <span class="error" ng-if="userInfo.wrongPass">Passwords don't match</span>
+              </li>
+              <li>
+                <label for="repPassword">Repeat <ng-container style="text-transform:lowercase">{{titleHeader.password}}*</ng-container></label>
+                <input type="password" name="repPassword" id="repPassword" ng-model="user.repPassword" pattern="^(?=.*[a-z])(?=.*[0-9]).{8,}$" required>
+              </li>
+            </ul>
+            <div class="user-view-buttons">
+              <div class="create-btn" ng-if="userInfo.type == 'create'">
+                <button  ng-click="manageUser('create', user)" class="button submit" type="submit" ng-disabled="!form.$valid">Create</button>   
+              </div>
+              <div class="edit-btn clearfix" ng-if="userInfo.type == 'edit'">
+                <button  ng-click="manageUser('delete', user)" class="button delete" type="button">Delete</button> 
+                <button  ng-click="manageUser('edit', user)" class="button submit" type="submit">Save</button> 
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <error ng-if="userInfo.error.show" text="{{userInfo.error.text}}"></error>
+    <success ng-if="userInfo.success.show" text="{{userInfo.success.text}}"></success>
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
