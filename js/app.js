@@ -136,9 +136,11 @@ angular.module('app', ['components'])
         for (let i = 0; i < this.userList.length; i++) {
           const e = this.userList[i];
           if (e.username == currentUser.username) {
-            this.userList.splice(i,1);
-            this.errorSuccess('success', 'User deleted');
-            this.openUser('close');
+            if (confirm('Are you sure you want to delete this user from database?')) {
+              this.userList.splice(i,1);
+              this.errorSuccess('success', 'User deleted');
+              this.openUser('close');
+            }
           }
         }
         break;
